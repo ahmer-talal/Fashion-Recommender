@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+body {
+    background: linear-gradient(135deg, #2dd4bf, #a78bfa);
+    font-family: 'Inter', sans-serif;
+    color: #0f766e;
+}
+
+.stApp {
+    background: transparent;
+    padding: 24px;
+}
+
+.sidebar .sidebar-content {
+    background: #f9fafb;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-left: 4px solid #2dd4bf;
+    animation: slideInLeft 0.5s ease-out;
+}
+
+@keyframes slideInLeft {
+    0% { opacity: 0; transform: translateX(-20px); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+
+.card {
+    background: #fefcbf;
+    border-radius: 12px;
+    padding: 16px;
+    margin: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border: 1px solid transparent;
+    background-image: linear-gradient(#fefcbf, #fefcbf), linear-gradient(to right, #2dd4bf, #f472b6);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: slideInBottom 0.5s ease-out;
+}
+
+.card:nth-child(3n+1) { animation-delay: 0.1s; }
+.card:nth-child(3n+2) { animation-delay: 0.2s; }
+.card:nth-child(3n+3) { animation-delay: 0.3s; }
+
+@keyframes slideInBottom {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(244, 114, 182, 0.4);
+    animation: pulseGlow 1.5s infinite;
+}
+
+@keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 8px 20px rgba(244, 114, 182, 0.4); }
+    50% { box-shadow: 0 8px 24px rgba(244, 114, 182, 0.6); }
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #0f766e;
+    margin-bottom: 8px;
+}
+
+.card-text {
+    font-size: 12px;
+    color: #6b7280;
+    margin: 4px 0;
+    display: flex;
+    align-items: center;
+}
+
+.card-text::before {
+    content: '•';
+    color: #f472b6;
+    margin-right: 8px;
+}
+
+.stButton>button {
+    background: #2dd4bf;
+    color: white;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: 14px;
+    border: none;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    animation: pulseButton 2s infinite;
+    display: block;
+    margin: 0 auto;
+}
+
+@keyframes pulseButton {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.stButton>button:hover {
+    background: #14b8a6;
+    transform: translateY(-2px);
+}
+
+.stButton>button:active::after {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+    to { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+}
+
+h1 {
+    color: white;
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 24px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    animation: typewriter 2s steps(20) 1s 1 normal both;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+@keyframes typewriter {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+.stSelectbox label, .stSidebar label {
+    color: #0f766e;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.stSelectbox div {
+    border-radius: 8px;
+    transition: border-color 0.3s ease;
+}
+
+.stSelectbox div:hover {
+    border-color: #f472b6 !important;
+}
+
+.stWarning {
+    background: linear-gradient(135deg, #fee2e2, #fecaca);
+    color: #b91c1c;
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid #f87171;
+}
+
+.stInfo {
+    background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+    color: #065f46;
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid #34d399;
+}
