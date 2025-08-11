@@ -2,6 +2,15 @@ import streamlit as st
 import pandas as pd
 import os
 
+import generate_fashion_dataset  # Make sure this is imported
+
+dataset_path = "improved_fashion_dataset_detailed.txt"
+
+if not os.path.exists(dataset_path):
+    print("Dataset not found. Generating now...")
+    generate_fashion_dataset.main()  # or whatever function generates your dataset
+    print("Dataset generated successfully!")
+
 # Custom CSS
 st.markdown("""
 <style>
