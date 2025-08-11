@@ -1,6 +1,13 @@
 import pandas as pd
 import itertools
 import random
+def main():
+    # Your dataset generation code here
+    # Save it as 'improved_fashion_dataset_detailed.txt' in same folder
+    pass
+
+if __name__ == "__main__":
+    main()
 
 # Define attributes
 categories = ['T-shirt', 'Kurta', 'Jeans', 'Chinos', 'Blazer', 'Hoodie', 'A-line Dress', 'Maxi Dress', 'Shirt', 'Skirt', 'Sweater', 'Jacket', 'Trouser', 'Blouse', 'Sweatshirt', 'Lehenga', 'Sherwani']
