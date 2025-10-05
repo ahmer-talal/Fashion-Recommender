@@ -14,11 +14,11 @@ if not os.path.exists(dataset_path):
 # ========== ✨ Combined & Optimized CSS ==========
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
 
-/* Global Styling */
+/* ========== Global Styling ========== */
 body {
-    background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
+    background: radial-gradient(circle at top, #0a0a0a 0%, #1a1a1a 60%, #000000 100%);
     font-family: 'Poppins', sans-serif;
     color: #f5f5f5;
 }
@@ -27,43 +27,47 @@ body {
     padding: 24px;
 }
 
-/* Sidebar */
-[data-testid="stSidebar"] {
-    background-color: #141414;
-    border-left: 3px solid #d4af37;
-    box-shadow: 0 4px 12px rgba(212,175,55,0.1);
-    padding: 24px;
-}
-
-/* Main Title */
+/* ========== Main Title ========== */
 h1 {
     text-align: center;
-    color: #F4C430;
+    background: linear-gradient(90deg, #FFD700, #FFB000);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     font-weight: 800;
-    letter-spacing: 2px;
-    font-size: 36px;
+    letter-spacing: 3px;
+    font-size: 42px;
     text-transform: uppercase;
-    margin-bottom: 28px;
+    margin-top: -15px;
+    margin-bottom: 30px;
+    text-shadow: 0 0 15px rgba(255,215,0,0.3);
+}
+
+/* Sidebar */
+[data-testid="stSidebar"] {
+    background-color: #0f0f0f;
+    border-right: 3px solid #d4af37;
+    box-shadow: 0 0 20px rgba(212,175,55,0.15);
+    padding: 24px;
 }
 
 /* Card Design */
 .card {
-    background: #1f1f1f;
-    border-radius: 14px;
-    padding: 20px;
+    background: #1b1b1b;
+    border-radius: 16px;
+    padding: 18px;
     margin: 10px;
-    box-shadow: 0 4px 15px rgba(212,175,55,0.15);
     border: 1px solid rgba(212,175,55,0.2);
+    box-shadow: 0 4px 15px rgba(212,175,55,0.15);
     transition: all 0.3s ease;
 }
 .card:hover {
-    transform: translateY(-6px);
+    transform: translateY(-5px);
     box-shadow: 0 8px 25px rgba(212,175,55,0.35);
 }
 .card-title {
     font-size: 20px;
     font-weight: 600;
-    color: #d4af37;
+    color: #FFD700;
     margin-bottom: 8px;
 }
 .card-text {
@@ -78,13 +82,12 @@ h1 {
     color: black;
     font-weight: bold;
     border-radius: 12px;
-    padding: 12px 24px;
+    padding: 12px 26px;
     border: none;
     transition: all 0.3s ease;
 }
 .stButton>button:hover {
     background: #d4af37;
-    color: #000;
     transform: translateY(-3px);
     box-shadow: 0 0 15px rgba(212,175,55,0.5);
 }
@@ -95,11 +98,9 @@ h1 {
     font-weight: 600;
     font-size: 14px;
 }
-.stSelectbox div:hover {
-    border-color: #d4af37 !important;
-}
 </style>
 """, unsafe_allow_html=True)
+
 
 # ========== ⚙️ Load Data ==========
 @st.cache_data
