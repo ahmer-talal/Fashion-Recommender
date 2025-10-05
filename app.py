@@ -1,21 +1,22 @@
 import streamlit as st
 import pandas as pd
 import os
-
 import generate_fashion_dataset  
 
 dataset_path = "improved_fashion_dataset_detailed.txt"
 
+# Generate dataset if missing
 if not os.path.exists(dataset_path):
     print("Dataset not found. Generating now...")
-    generate_fashion_dataset.main()  # or whatever function generates your dataset
+    generate_fashion_dataset.main()
     print("Dataset generated successfully!")
 
-# Custom CSS
+# ========== ✨ Combined & Optimized CSS ==========
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
+/* Global Styling */
 body {
     background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
     font-family: 'Poppins', sans-serif;
@@ -25,13 +26,27 @@ body {
     background: transparent;
     padding: 24px;
 }
-.sidebar .sidebar-content {
-    background: #141414;
-    border-radius: 12px;
-    padding: 24px;
+
+/* Sidebar */
+[data-testid="stSidebar"] {
+    background-color: #141414;
     border-left: 3px solid #d4af37;
     box-shadow: 0 4px 12px rgba(212,175,55,0.1);
+    padding: 24px;
 }
+
+/* Main Title */
+h1 {
+    text-align: center;
+    color: #F4C430;
+    font-weight: 800;
+    letter-spacing: 2px;
+    font-size: 36px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+}
+
+/* Card Design */
 .card {
     background: #1f1f1f;
     border-radius: 14px;
@@ -56,29 +71,25 @@ body {
     color: #d1d1d1;
     margin: 6px 0;
 }
-h1 {
-    color: #d4af37;
-    font-size: 36px;
-    text-align: center;
-    margin-bottom: 28px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-}
+
+/* Button */
 .stButton>button {
-    background: linear-gradient(135deg, #000000, #2c2c2c);
-    color: #d4af37;
-    border-radius: 10px;
+    background: linear-gradient(90deg, #F4C430, #FFB300);
+    color: black;
+    font-weight: bold;
+    border-radius: 12px;
     padding: 12px 24px;
-    font-weight: 600;
-    border: 1px solid #d4af37;
+    border: none;
     transition: all 0.3s ease;
 }
 .stButton>button:hover {
     background: #d4af37;
-    color: #0d0d0d;
+    color: #000;
     transform: translateY(-3px);
     box-shadow: 0 0 15px rgba(212,175,55,0.5);
 }
+
+/* Inputs & Labels */
 .stSelectbox label, .stSidebar label {
     color: #f5f5f5;
     font-weight: 600;
@@ -90,7 +101,7 @@ h1 {
 </style>
 """, unsafe_allow_html=True)
 
-# Load dataset
+# ========== ⚙️ Load Data ==========
 @st.cache_data
 def load_data():
     file_path = 'improved_fashion_dataset_detailed.txt'
@@ -100,22 +111,19 @@ def load_data():
         st.error(f"Dataset file '{file_path}' not found in {os.getcwd()}")
         return None
 
-# Recommendation algorithm
+# ========== 🧠 Recommendation Logic ==========
 def recommend_items(df, gender, body_type, skin_tone, height, season):
     filtered_df = df.copy()
     
-    # Strict gender filter
+    # Strict gender and season filters
     if gender != "All":
         filtered_df = filtered_df[filtered_df['gender'] == gender]
-    
-    # Strict season filter
     if season != "All":
         filtered_df = filtered_df[filtered_df['season'].isin([season, 'All-season'])]
-    
-    # Initialize scores
+
     filtered_df['score'] = 0.0
     
-    # Scoring logic
+    # Weighted scoring
     if gender != "All":
         filtered_df['score'] += (filtered_df['gender'] == gender) * 0.3
     if body_type != "All":
@@ -126,8 +134,8 @@ def recommend_items(df, gender, body_type, skin_tone, height, season):
         filtered_df['score'] += filtered_df['suitable_height_range'].str.contains(height, na=False) * 0.1
     if season != "All":
         filtered_df['score'] += (filtered_df['season'] == season) * 0.2
-    
-    # Color suitability
+
+    # Color match
     color_suitability = {
         'Apple': ['Black', 'Navy', 'Charcoal', 'Burgundy', 'Indigo', 'Olive', 'Maroon'],
         'Pear': ['Black', 'Maroon', 'Olive', 'Indigo', 'Grey', 'Brown'],
@@ -144,28 +152,27 @@ def recommend_items(df, gender, body_type, skin_tone, height, season):
         filtered_df['score'] += filtered_df['color'].isin(color_suitability[body_type]) * 0.2
     if skin_tone in color_suitability:
         filtered_df['score'] += filtered_df['color'].isin(color_suitability[skin_tone]) * 0.2
-    
-    # Filter and sort
+
+    # Final ranking
     filtered_df = filtered_df[filtered_df['score'] >= 0.8].sort_values(by='score', ascending=False).head(12)
-    
     return filtered_df
 
-# Main app
+# ========== 🚀 Main App ==========
 def main():
     st.title("Fashionify")
-    
     df = load_data()
     if df is None:
         return
-    
-    # Sidebar
+
+    # Sidebar filters
     st.sidebar.header("Your Style Preferences")
     gender = st.sidebar.selectbox("Gender", ["All", "Men", "Women"])
     body_type = st.sidebar.selectbox("Body Type", ["All"] + sorted(df['suitable_body_type'].str.split('|').explode().unique()))
     skin_tone = st.sidebar.selectbox("Skin Tone", ["All"] + sorted(df['suitable_skin_tone'].str.split('|').explode().unique()))
     height = st.sidebar.selectbox("Height Range", ["All"] + sorted(df['suitable_height_range'].str.split('|').explode().unique()))
     season = st.sidebar.selectbox("Season", ["All"] + sorted(df['season'].unique()))
-    
+
+    # Button
     if st.button("Get Recommendations"):
         filtered_df = recommend_items(df, gender, body_type, skin_tone, height, season)
         
