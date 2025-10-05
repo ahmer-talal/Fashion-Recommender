@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import os
 
-import generate_fashion_dataset  # Make sure this is imported
+import generate_fashion_dataset  
 
 dataset_path = "improved_fashion_dataset_detailed.txt"
 
@@ -14,153 +14,78 @@ if not os.path.exists(dataset_path):
 # Custom CSS
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
 body {
-    background: linear-gradient(135deg, #2dd4bf, #a78bfa);
-    font-family: 'Inter', sans-serif;
-    color: #0f766e;
+    background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
+    font-family: 'Poppins', sans-serif;
+    color: #f5f5f5;
 }
 .stApp {
     background: transparent;
     padding: 24px;
 }
 .sidebar .sidebar-content {
-    background: #f9fafb;
+    background: #141414;
     border-radius: 12px;
     padding: 24px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    border-left: 4px solid #2dd4bf;
-    animation: slideInLeft 0.5s ease-out;
-}
-@keyframes slideInLeft {
-    0% { opacity: 0; transform: translateX(-20px); }
-    100% { opacity: 1; transform: translateX(0); }
+    border-left: 3px solid #d4af37;
+    box-shadow: 0 4px 12px rgba(212,175,55,0.1);
 }
 .card {
-    background: #e5e7eb;
-    border-radius: 12px;
+    background: #1f1f1f;
+    border-radius: 14px;
     padding: 20px;
-    margin: 8px;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
-    border: 1px solid transparent;
-    background-image: linear-gradient(#e5e7eb, #e5e7eb), linear-gradient(to right, #2dd4bf, #f472b6);
-    background-origin: border-box;
-    background-clip: padding-box, border-box;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    animation: slideInBottom 0.5s ease-out;
-}
-.card:nth-child(3n+1) { animation-delay: 0.1s; }
-.card:nth-child(3n+2) { animation-delay: 0.2s; }
-.card:nth-child(3n+3) { animation-delay: 0.3s; }
-@keyframes slideInBottom {
-    0% { opacity: 0; transform: translateY(20px); }
-    100% { opacity: 1; transform: translateY(0); }
+    margin: 10px;
+    box-shadow: 0 4px 15px rgba(212,175,55,0.15);
+    border: 1px solid rgba(212,175,55,0.2);
+    transition: all 0.3s ease;
 }
 .card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 20px rgba(245, 158, 11, 0.4);
-    animation: pulseGlow 1.5s infinite;
-}
-@keyframes pulseGlow {
-    0%, 100% { box-shadow: 0 8px 20px rgba(245, 158, 11, 0.4); }
-    50% { box-shadow: 0 8px 24px rgba(245, 158, 11, 0.6); }
+    transform: translateY(-6px);
+    box-shadow: 0 8px 25px rgba(212,175,55,0.35);
 }
 .card-title {
     font-size: 20px;
     font-weight: 600;
-    color: #0f766e;
-    margin-bottom: 12px;
+    color: #d4af37;
+    margin-bottom: 8px;
 }
 .card-text {
     font-size: 14px;
-    color: #6b7280;
+    color: #d1d1d1;
     margin: 6px 0;
-    display: flex;
-    align-items: center;
-}
-.card-text::before {
-    content: '•';
-    color: #f59e0b;
-    font-size: 16px;
-    margin-right: 10px;
-}
-.stButton>button {
-    background: #2dd4bf;
-    color: white;
-    border-radius: 8px;
-    padding: 12px 24px;
-    font-size: 14px;
-    border: none;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    animation: pulseButton 2s infinite;
-    display: block;
-    margin: 0 auto;
-}
-@keyframes pulseButton {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-}
-.stButton>button:hover {
-    background: #14b8a6;
-    transform: translateY(-2px);
-}
-.stButton>button:active::after {
-    content: '';
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    background: rgba(255,255,255,0.3);
-    border-radius: 50%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    animation: ripple 0.6s ease-out;
-}
-@keyframes ripple {
-    to { transform: translate(-50%, -50%) scale(2); opacity: 0; }
 }
 h1 {
-    color: white;
-    font-size: 32px;
+    color: #d4af37;
+    font-size: 36px;
     text-align: center;
-    margin-bottom: 24px;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    animation: typewriter 2s steps(20) 1s 1 normal both;
-    overflow: hidden;
-    white-space: nowrap;
+    margin-bottom: 28px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
 }
-@keyframes typewriter {
-    from { width: 0; }
-    to { width: 100%; }
+.stButton>button {
+    background: linear-gradient(135deg, #000000, #2c2c2c);
+    color: #d4af37;
+    border-radius: 10px;
+    padding: 12px 24px;
+    font-weight: 600;
+    border: 1px solid #d4af37;
+    transition: all 0.3s ease;
+}
+.stButton>button:hover {
+    background: #d4af37;
+    color: #0d0d0d;
+    transform: translateY(-3px);
+    box-shadow: 0 0 15px rgba(212,175,55,0.5);
 }
 .stSelectbox label, .stSidebar label {
-    color: #0f766e;
+    color: #f5f5f5;
     font-weight: 600;
     font-size: 14px;
 }
-.stSelectbox div {
-    border-radius: 8px;
-    transition: border-color 0.3s ease;
-}
 .stSelectbox div:hover {
-    border-color: #f59e0b !important;
-}
-.stWarning {
-    background: linear-gradient(135deg, #fee2e2, #fecaca);
-    color: #b91c1c;
-    padding: 16px;
-    border-radius: 8px;
-    border: 1px solid #f87171;
-}
-.stInfo {
-    background: linear-gradient(135deg, #d1fae5, #a7f3d0);
-    color: #065f46;
-    padding: 16px;
-    border-radius: 8px;
-    border: 1px solid #34d399;
+    border-color: #d4af37 !important;
 }
 </style>
 """, unsafe_allow_html=True)
