@@ -16,18 +16,14 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
 
-/* ========== Global Styling ========== */
-body {
-    background: radial-gradient(circle at top, #0a0a0a 0%, #1a1a1a 60%, #000000 100%);
+/* ===== Global Reset ===== */
+html, body, [class*="stApp"], [data-testid="stAppViewContainer"], [data-testid="stVerticalBlock"] {
+    background: radial-gradient(circle at top, #0a0a0a 0%, #1a1a1a 60%, #000000 100%) !important;
+    color: #f5f5f5 !important;
     font-family: 'Poppins', sans-serif;
-    color: #f5f5f5;
-}
-.stApp {
-    background: transparent;
-    padding: 24px;
 }
 
-/* ========== Main Title ========== */
+/* ===== Main Page Title ===== */
 h1 {
     text-align: center;
     background: linear-gradient(90deg, #FFD700, #FFB000);
@@ -42,15 +38,14 @@ h1 {
     text-shadow: 0 0 15px rgba(255,215,0,0.3);
 }
 
-/* Sidebar */
+/* ===== Sidebar ===== */
 [data-testid="stSidebar"] {
-    background-color: #0f0f0f;
+    background-color: #0f0f0f !important;
     border-right: 3px solid #d4af37;
     box-shadow: 0 0 20px rgba(212,175,55,0.15);
-    padding: 24px;
 }
 
-/* Card Design */
+/* ===== Card ===== */
 .card {
     background: #1b1b1b;
     border-radius: 16px;
@@ -68,15 +63,13 @@ h1 {
     font-size: 20px;
     font-weight: 600;
     color: #FFD700;
-    margin-bottom: 8px;
 }
 .card-text {
     font-size: 14px;
     color: #d1d1d1;
-    margin: 6px 0;
 }
 
-/* Button */
+/* ===== Button ===== */
 .stButton>button {
     background: linear-gradient(90deg, #F4C430, #FFB300);
     color: black;
@@ -92,15 +85,13 @@ h1 {
     box-shadow: 0 0 15px rgba(212,175,55,0.5);
 }
 
-/* Inputs & Labels */
+/* ===== Inputs ===== */
 .stSelectbox label, .stSidebar label {
     color: #f5f5f5;
     font-weight: 600;
-    font-size: 14px;
 }
 </style>
 """, unsafe_allow_html=True)
-
 
 # ========== ⚙️ Load Data ==========
 @st.cache_data
