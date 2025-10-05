@@ -2,8 +2,6 @@ import pandas as pd
 import itertools
 import random
 def main():
-    # Your dataset generation code here
-    # Save it as 'improved_fashion_dataset_detailed.txt' in same folder
     pass
 
 if __name__ == "__main__":
