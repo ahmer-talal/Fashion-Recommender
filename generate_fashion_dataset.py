@@ -114,6 +114,7 @@ for idx, (category, gender, style, season, color) in enumerate(combinations):
     }
     data.append(row_data)
 
+
 # Create DataFrame
 df = pd.DataFrame(data)
 
