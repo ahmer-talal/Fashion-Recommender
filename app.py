@@ -10,6 +10,7 @@ if not os.path.exists(dataset_path):
     print("Dataset not found. Generating now...")
     generate_fashion_dataset.main()
     print("Dataset generated successfully!")
+    
 
 # ========== ✨ Combined & Optimized CSS ==========
 st.markdown("""
